@@ -1,20 +1,15 @@
+# buildspec.yml (located in ecolens-backend folder)
 version: 0.2
-# This file tells CodeBuild what to do in each phase of the pipeline.
-
 phases:
   install:
     runtime-versions:
-      # Match these to your environment (e.g., Python 3.12, Node 20)
-      nodejs: 20 
       python: 3.12
     commands:
-      # 1. Install the SAM CLI tool within the build environment
       - pip install aws-sam-cli
   build:
     commands:
-      # 2. Package the code, download dependencies, and prepare artifacts
       - sam build --template template.yaml
-  post_build:
-    commands:
-      # 3. Deploy the application using the existing CloudFormation stack name (ecolens-stack)
-      - sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
+artifacts:
+  files:
+    - '**/*'
+  base-directory: .aws-sam/build
