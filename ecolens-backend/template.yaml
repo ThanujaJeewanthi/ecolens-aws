@@ -21,27 +21,27 @@ Globals:
       AllowOrigin: "'*'"    
 Resources:
   HelloWorldFunction:
-  Type: AWS::Serverless::Function
-  Properties:
-    CodeUri: hello_world/
-    Handler: app.lambda_handler
-    Runtime: python3.12
-    Architectures:
-      - x86_64
-    Policies:
-      - Version: "2012-10-17"
-        Statement:
-          - Sid: RekognitionAccess
-            Effect: Allow
-            Action:
-              - rekognition:DetectLabels
-            Resource: "*"
-    Events:
-      HelloWorld:
-        Type: Api
-        Properties:
-          Path: /hello
-          Method: post
+    Type: AWS::Serverless::Function  # ✅ Correct indentation
+    Properties:
+      CodeUri: hello_world/
+      Handler: app.lambda_handler
+      Runtime: python3.12
+      Architectures:
+        - x86_64
+      Policies:
+        - Version: "2012-10-17"
+          Statement:
+            - Sid: RekognitionAccess
+              Effect: Allow
+              Action:
+                - rekognition:DetectLabels
+              Resource: "*"
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: post
 
 
 Outputs:
